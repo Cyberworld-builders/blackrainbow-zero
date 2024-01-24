@@ -1,3 +1,22 @@
+resource "aws_eip" "wazuh" {}
+
+resource "aws_instance" "wazuh" {
+  ami           = var.ami_id
+  instance_type = var.instance_type
+  vpc_security_group_ids = [aws_security_group.wazuh.id]
+  subnet_id     = var.subnet_id
+  iam_instance_profile = aws_iam_instance_profile.wazuh.name
+  
+  tags = {
+    Name = "${var.project_name}-${var.environment}-wazuh"
+  }  
+}
+
+resource "aws_eip_association" "wazuh" {
+  instance_id   = aws_instance.wazuh.id
+  allocation_id = aws_eip.wazuh.id
+}
+
 # instance profile
 resource "aws_iam_instance_profile" "wazuh" {
   name = "${var.project_name}-${var.environment}-wazuh"

@@ -1,5 +1,17 @@
-variable "vpc_id" {
+variable "example_aws_region" {
+  type        = string
+  default     = "us-east-1"
+  description = "AWS region for all resources"  
+}
+
+variable "example_aws_vpc_id" {
   type        = string
   default     = "vpc-12345678"
   description = "VPC ID for all resources"  
+}
+
+variable "example_aws_public_subnet_id" {
+  type        = string
+  default     = "subnet-12345678"
+  description = "Public subnet ID for all resources"  
 }

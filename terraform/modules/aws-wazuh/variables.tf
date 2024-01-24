@@ -12,7 +12,7 @@ variable "environment" {
 
 variable "aws_region" {
   type        = string
-  default     = "us-east-2"
+  default     = "us-east-1"
   description = "AWS region for all resources"
 }
 
@@ -20,4 +20,22 @@ variable "vpc_id" {
   type        = string
   default     = "vpc-12345678"
   description = "VPC ID for all resources"
+}
+
+variable "ami_id" {
+  type        = string
+  default     = "ami-05fb0b8c1424f266b"
+  description = "AMI ID for all resources"
+}
+
+variable "instance_type" {
+  type        = string
+  default     = "t2.medium"
+  description = "Instance type for all resources"
+}
+
+variable "subnet_id" {
+  type        = string
+  default     = "subnet-12345678"
+  description = "Subnet ID for all resources"
 }

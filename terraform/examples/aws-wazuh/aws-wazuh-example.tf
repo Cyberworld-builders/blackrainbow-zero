@@ -14,7 +14,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-2"
+  region = var.example_aws_region
 }
 
 module "aws-wazuh" {
@@ -22,6 +22,9 @@ module "aws-wazuh" {
   source = "../../modules/aws-wazuh"
   project_name = "blackrainbow"
   environment = "example"
-  aws_region = "us-east-2"
-  vpc_id = var.vpc_id
+  aws_region = var.example_aws_region
+  vpc_id = var.example_aws_vpc_id
+  ami_id = "ami-05fb0b8c1424f266b"
+  instance_type = "t2.medium"
+  subnet_id = var.example_aws_public_subnet_id
 }
