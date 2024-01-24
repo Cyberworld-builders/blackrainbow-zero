@@ -6,6 +6,7 @@ terraform {
     }
   }
   cloud {
+    organization = "cyberworld-builders"
     workspaces {
       name = "example-aws-oidc-test"
     }
