@@ -4,6 +4,12 @@ variable "project_name" {
   description = "Project name for all resources"  
 }
 
+variable "environment" {
+  type        = string
+  default     = "dev"
+  description = "Environment for all resources"  
+}
+
 variable "aws_region" {
   type        = string
   default     = "us-east-2"

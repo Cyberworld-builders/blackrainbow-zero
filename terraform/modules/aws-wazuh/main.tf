@@ -6,7 +6,7 @@ resource "aws_iam_instance_profile" "wazuh" {
 
 # role
 resource "aws_iam_role" "wazuh" {
-  name = "wazuh"
+  name = "${var.project_name}-${var.environment}-wazuh"
   assume_role_policy = <<EOF
 {
   "Version": "2012-10-17",
