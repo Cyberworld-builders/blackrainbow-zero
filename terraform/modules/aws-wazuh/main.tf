@@ -6,6 +6,10 @@ resource "aws_instance" "wazuh" {
   vpc_security_group_ids = [aws_security_group.wazuh.id]
   subnet_id     = var.subnet_id
   iam_instance_profile = aws_iam_instance_profile.wazuh.name
+
+  user_data = templatefile("${path.module}/user_data.sh.tpl", {
+    eip        = aws_eip.wazuh.public_ip
+  })
   
   tags = {
     Name = "${var.project_name}-${var.environment}-wazuh"
