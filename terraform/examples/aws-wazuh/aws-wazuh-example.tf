@@ -23,4 +23,5 @@ module "aws-wazuh" {
   project_name = "br"
   environment = "dev"
   aws_region = "us-east-2"
+  vpc_id = var.vpc_id
 }

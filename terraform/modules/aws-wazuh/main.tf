@@ -1,7 +1,14 @@
 # instance profile
 resource "aws_iam_instance_profile" "wazuh" {
-  name = "wazuh"
+  name = "${var.project_name}-${var.environment}-wazuh"
   role = aws_iam_role.wazuh.name
+}
+
+# Security Group and Rules
+resource "aws_security_group" "wazuh" {
+  name        = "${var.project_name}-${var.environment}-wazuh"
+  description = "Security group for wazuh SIEM"
+  vpc_id      = var.vpc_id  
 }
 
 # role
