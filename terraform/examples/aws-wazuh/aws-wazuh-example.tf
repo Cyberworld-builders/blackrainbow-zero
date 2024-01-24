@@ -27,4 +27,5 @@ module "aws-wazuh" {
   ami_id = "ami-05fb0b8c1424f266b"
   instance_type = "t2.medium"
   subnet_id = var.example_aws_public_subnet_id
+  allowed_ips = [var.example_developer_ip]
 }

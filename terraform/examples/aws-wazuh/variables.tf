@@ -15,3 +15,8 @@ variable "example_aws_public_subnet_id" {
   default     = "subnet-12345678"
   description = "Public subnet ID for all resources"  
 }
+
+variable "example_developer_ip" {
+  type        = string
+  default     = "123.45.67.890/32"  
+}

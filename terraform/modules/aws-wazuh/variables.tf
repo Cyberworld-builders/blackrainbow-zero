@@ -39,3 +39,9 @@ variable "subnet_id" {
   default     = "subnet-12345678"
   description = "Subnet ID for all resources"
 }
+
+variable "allowed_ips" {
+  type        = list(string)
+  default     = ["123.45.67.890/32"]
+  description = "Allowed IPs for all resources"
+}
