@@ -20,8 +20,8 @@ provider "aws" {
 module "aws-wazuh" {
 #   source = "github.com/cyberworld-builders/terraform//modules/aws-wazuh"
   source = "../../modules/aws-wazuh"
-  project_name = "br"
-  environment = "dev"
+  project_name = "blackrainbow"
+  environment = "example"
   aws_region = "us-east-2"
   vpc_id = var.vpc_id
 }
