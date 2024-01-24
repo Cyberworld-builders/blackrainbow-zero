@@ -1,7 +1,3 @@
-provider "aws" {
-  region = var.aws_region
-}
-
 # instance profile
 resource "aws_iam_instance_profile" "wazuh" {
   name = "wazuh"
