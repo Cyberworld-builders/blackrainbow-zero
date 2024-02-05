@@ -7,9 +7,9 @@ module "vpn" {
   ebs_optimized          = true
   monitoring             = true
   vpc_security_group_ids = [aws_security_group.pritunl_vpn_access_sg.id]
-  subnet_id              = module.vpc.public_subnets[1]
+  subnet_id              = var.subnet_id
 #   user_data
-  iam_instance_profile        = aws_iam_instance_profile.vpn_pritunl.id
+  iam_instance_profile        = aws_iam_instance_profile.vpn.id
   associate_public_ip_address = true
   tags = {
     Name          = "vpn-${var.environment}",
@@ -23,6 +23,56 @@ module "vpn" {
       volume_size = 20
     }
   ]
+}
+
+# create a security group for the vpn
+resource "aws_security_group" "pritunl_vpn_access_sg" {
+  name        = "pritunl-vpn-access-sg-${var.environment}"
+  description = "Security group for pritunl vpn access"
+  vpc_id      = var.vpc_id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+    tags = {
+        Name          = "pritunl-vpn-access-sg-${var.environment}",
+        "Environment" = var.environment,
+        "Terraform"   = true
+    }
+}
+
+# allow access to the vpn from the internet
+resource "aws_security_group_rule" "pritunl_vpn_access_sg_ingress" {
+  type        = "ingress"
+  from_port   = 443
+  to_port     = 443
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.pritunl_vpn_access_sg.id
+}
+
+# allow ingress on port 80 for letsencrypt
+resource "aws_security_group_rule" "pritunl_vpn_access_sg_ingress_letsencrypt" {
+  type        = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.pritunl_vpn_access_sg.id
+}
+
+# allow access to the vpn from the internet
+resource "aws_security_group_rule" "pritunl_vpn_access_sg_ingress_udp" {
+  type        = "ingress"
+  from_port   = 1194
+  to_port     = 1194
+  protocol    = "udp"
+  cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.pritunl_vpn_access_sg.id
 }
 
 # create an iam role for the vpn
