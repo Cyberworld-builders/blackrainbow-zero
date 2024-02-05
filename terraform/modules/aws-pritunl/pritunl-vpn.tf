@@ -8,7 +8,10 @@ module "vpn" {
   monitoring             = true
   vpc_security_group_ids = [aws_security_group.pritunl_vpn_access_sg.id]
   subnet_id              = var.subnet_id
-#   user_data
+  user_data = templatefile("${path.module}/vpn-userdata.tpl", {
+    environment = var.environment,
+    prefix      = "vpn-${var.environment}"
+  })
   iam_instance_profile        = aws_iam_instance_profile.vpn.id
   associate_public_ip_address = true
   tags = {
