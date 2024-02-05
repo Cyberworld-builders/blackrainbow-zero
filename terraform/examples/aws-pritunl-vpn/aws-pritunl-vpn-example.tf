@@ -1,5 +1,5 @@
 module "pritunl_vpn" {
-    source = "../../../../../modules/aws-pritunl"
+    source = "../../modules/aws-pritunl"
 
     environment = "example"
     vpc_id = "vpc-02d8e874d887624c0"
