@@ -1,4 +1,4 @@
-module "vpn" {
+module "vpn_instance" {
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "v5.1.0"
   name                   = "vpn-${var.environment}"
@@ -106,6 +106,6 @@ resource "aws_eip" "vpn" {}
 
 # create an attachment with the instance
 resource "aws_eip_association" "vpn" {
-  instance_id   = aws_instance.vpn.id
+  instance_id   = module.vpn_instance.id
   allocation_id = aws_eip.vpn.id
 }
