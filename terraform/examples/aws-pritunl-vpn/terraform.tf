@@ -8,7 +8,7 @@ terraform {
   cloud {
     organization = "cyberworld-builders"
     workspaces {
-      name = "example-pritunl-vpn"
+      name = "example-aws-pritunl-vpn"
     }
   }
 }
