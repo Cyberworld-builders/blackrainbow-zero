@@ -100,3 +100,12 @@ resource "aws_iam_instance_profile" "vpn" {
   name = "vpn-${var.environment}"
   role = aws_iam_role.vpn.id
 }
+
+#  launch an eip
+resource "aws_eip" "vpn" {}
+
+# create an attachment with the instance
+resource "aws_eip_association" "vpn" {
+  instance_id   = aws_instance.vpn.id
+  allocation_id = aws_eip.vpn.id
+}
