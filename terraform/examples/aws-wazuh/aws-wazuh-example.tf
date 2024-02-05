@@ -28,4 +28,6 @@ module "aws-wazuh" {
   instance_type = "t2.medium"
   subnet_id = var.example_aws_public_subnet_id
   allowed_ips = [var.example_developer_ip]
+
+  count = 0
 }
