@@ -77,6 +77,16 @@ resource "aws_security_group_rule" "pritunl_vpn_access_sg_ingress_udp" {
   cidr_blocks = ["0.0.0.0/0"]
     security_group_id = aws_security_group.pritunl_vpn_access_sg.id
 }
+# loop through the server ports and allow udp ingress for connections
+resource "aws_security_group_rule" "pritunl_vpn_access_sg_ingress_server_ports" {
+  count       = length(var.server_ports)
+  type        = "ingress"
+  from_port   = var.server_ports[count.index]
+  to_port     = var.server_ports[count.index]
+  protocol    = "udp"
+  cidr_blocks = ["0.0.0.0/0"]
+    security_group_id = aws_security_group.pritunl_vpn_access_sg.id
+}
 
 # create an iam role for the vpn
 resource "aws_iam_role" "vpn" {
