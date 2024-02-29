@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 terraform {
-  # use s3 for the backend. the bucket is called "kompliant-terraform-examples"
+  # use s3 for the backend. the bucket is called "derpys-playground-terraform-examples"
   backend "s3" {
     bucket = "derpys-playground-tf-examples"
     key    = "pritunl.tfstate"
